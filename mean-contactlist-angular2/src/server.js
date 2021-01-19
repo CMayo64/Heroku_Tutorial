@@ -62,3 +62,36 @@ app.put("/api/contacts/:id", function(req, res) {
   
 app.delete("/api/contacts/:id", function(req, res) {
 });
+
+/*  "/api/contacts"
+ *    GET: finds all contacts
+ *    POST: creates a new contact
+ */
+
+app.get("/api/contacts", function(req, res) {
+db.collection(CONTACTS_COLLECTION).find({}).toArray(function(err, docs) {
+    if (err) {
+      handleError(res, err.message, "Failed to get contacts.");
+    } else {
+      res.status(200).json(docs);
+    }
+});
+});
+  
+app.post("/api/contacts", function(req, res) {
+var newContact = req.body;
+newContact.createDate = new Date();
+  
+if (!req.body.name) {
+  handleError(res, "Invalid user input", "Must provide a name.", 400);
+} else {
+    db.collection(CONTACTS_COLLECTION).insertOne(newContact, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to create new contact.");
+    } else {
+        res.status(201).json(doc.ops[0]);
+    }
+    });
+}
+});
+  
