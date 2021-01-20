@@ -52,7 +52,6 @@ app.post("/api/contacts", function(req, res) {
  *    PUT: update contact by id
  *    DELETE: deletes contact by id
  */
-  
 app.get("/api/contacts/:id", function(req, res) {
 });
   
