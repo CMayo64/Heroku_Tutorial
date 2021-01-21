@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Contact } from '../contact';
-import { ContactService } from '../contact.service'
-
+import { ContactService } from '../contact.service';
 
 @Component({
   selector: 'contact-details',
@@ -15,10 +14,8 @@ export class ContactDetailsComponent {
 
   @Input()
   createHandler: Function;
-
   @Input()
   updateHandler: Function;
-
   @Input()
   deleteHandler: Function;
 
@@ -30,15 +27,15 @@ export class ContactDetailsComponent {
     });
   }
 
-  updateContact(contac: Contact): void {
-    this.contactService.updateContact(contact).then((updateContact: Contact) => {
-      this.updateHandler(updateContact);
+  updateContact(contact: Contact): void {
+    this.contactService.updateContact(contact).then((updatedContact: Contact) => {
+      this.updateHandler(updatedContact);
     });
   }
 
-  deleteContact(contacId: String):void {
-    this.contactService.deleteContact(contacId).then((deleteContact: String)=> {
-      this.deleteHandler(deleteContactId)
+  deleteContact(contactId: String): void {
+    this.contactService.deleteContact(contactId).then((deletedContactId: String) => {
+      this.deleteHandler(deletedContactId);
     });
   }
 }
